@@ -1,0 +1,58 @@
+#1
+resources :bunnies
+
+#2
+rails g migration AddWeightToBunnies
+
+#3
+Run the following in the command line:
+   rake db:rollback
+Enter the AddWeightToBunnies files
+Correct the spelling of weight
+Save AddWeightToBunnies
+Run the following in the command line:
+  run rake db:mirgrate
+Then
+    rake db:rollback  #just to make sure the file can rollback if needed
+Then
+    rake db:migrate
+
+#4
+Bunny.where(color: 'brown')
+
+#5
+Bunny.where(color: 'white').order(:name)
+
+#6
+Bunny.pluck(name: 'George')
+
+#7
+validate :name, presense: true
+
+#8
+/app/controllers/bunnies_controller
+
+#9
+/app/views/bunnies/show.html.erb
+
+#10
+@bunny = Bunny.id(#)
+
+#11
+The error is a result of params defaulted to public permission. The params access needs to be changed to private by adding a private bunnies_params method to the app/contorller/bunnies_controller
+file
+
+#12
+call on the persisted method for a return value of true
+bunny.persisted?
+
+#13
+<% @bunnies.each do |bunny| %>
+   <%= bunny.name %>
+<% end %>
+
+#14
+<%= link_to 'Specific Bunny', to: bunny_path %>
+
+#15
+render 'form'
