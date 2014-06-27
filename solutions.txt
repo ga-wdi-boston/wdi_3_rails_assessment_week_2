@@ -39,7 +39,7 @@ app/controllers/bunny_controller.rb
 
 3. I tried to update a bunny with the code `bunny.update(params[:bunny])`, but it gave me a "forbidden attributes error". Why is it telling me this, and what should I do (broadly speaking, no exact code needed) to fix the problem?
 
-!!!!!!!!!!!!!
+bunny is not a parameter of the bunny model, which is why the error is being raised.. To fix, simply pass in bunny_params to update instead.
 
 4. When I create or update a bunny in my controller, how can I find out whether the bunny saved successfully?
 
