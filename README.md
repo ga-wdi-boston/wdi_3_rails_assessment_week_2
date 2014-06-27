@@ -6,7 +6,7 @@ Fork this repository, update this file to include your answers, and submit a pul
 
 1. I'm creating an app to keep track of bunnies. I already have a `bunnies` table, but I want to create a migration to add a "weight" column to it. What command should I run in my terminal to get started?
 
-rails g migration
+rails g migration MEANINGFULNAME (always forget to add the name which rails always tells me)
 
 
 2. I just realized I misspelled the "weight" column in my migration, but I already ran `rake db:migrate`. What should I do to fix this? (give exact steps and/or commands to run)
@@ -21,13 +21,17 @@ rails g migration
 (sorting is tricky. I didn't really get how or where to do this.)
 (stack overflow suggests that below would work but I don't know how you would use this in a controller or a view)
 
-@whites = @bunnies.select(|bunny| bunny.color == 'white')
+@whites = @bunnies.select{|bunny| bunny.color == 'white'} (doesn't work)
+
+[Bunny.where(color: 'white').order(:name)]
 
 
---4. Now I want to find the specific bunny whose name is `'George'` (names are unique, so there should be only one).
+4. Now I want to find the specific bunny whose name is `'George'` (names are unique, so there should be only one).
 
 (same as above for placement)
-@george = @bunnies.where(name: "George")
+@george = @bunnies.where(name: "George") (wrong again!)
+
+[Bunny.find_by(name:'George')]
 
 
 5. I want to make sure nobunny, er, I mean nobody, can create a bunny without a name. What code should I add to my `Bunny` model to validate this?
@@ -38,6 +42,9 @@ validates :name, presence: true
 ### Controllers
 
 1. My app is telling me there's an error in the `BunniesController`. What directory and filename should I look in?
+
+app/controllers/bunnies_controller.rb
+(forgot app)
 
 Dir: controllers
 File: bunnies_controller.rb
@@ -57,7 +64,9 @@ Rails just doesn't like you enough to give you access to all the params, willy n
 
 5. Assuming my bunny saved successfully, what code should I write to redirect the user to the "show" page for the bunny, with a flash message indicating success?
 
-We didn't do flash yet. So I assume you just yell at the computer and dries till someone writes and empathy program that can solve all my problems.
+redirect_to bunny_path(@bunny.id)
+
+We didn't do flash yet. So I assume you just yell at the computer and cry till someone writes and empathy program that can solve all my problems.
 
 
 ### Routes/Views
@@ -70,6 +79,7 @@ resources :bunnies
 
 2. My app is telling me there's an error in the "show" view for bunnies. What directory and filename would that be located in?
 
+(need app again. forgot bunnies)
 Dir: Views , File: show.html.erb
 
 
@@ -77,14 +87,15 @@ Dir: Views , File: show.html.erb
 
 <ul>
   <% @bunnies.each do |bunny| %>
-    <%= bunny.name %>
+    <li><%= bunny.name %></li>
   <% end %>
 </ul>
 (glanced back at bookmarkr to see where those ul tags went. )
 
 4. In one of my views, I want to create a link to the "show" path for a specific bunny that I have stored in the variable `bunny`. `rake routes` tells me that I have a standard `bunny_path` helper available. How do I create this link?
 
-<% link_to(bunny, bunny_path) %>
+<% link_to('bunny', bunny_path(bunny)) %>
+(little wrong needed (bunny))
 
 5. I've created a view partial called `_form.html.erb` and I want to render this partial into my "new" view. What HTML/ERB code should I write to do this?
 
