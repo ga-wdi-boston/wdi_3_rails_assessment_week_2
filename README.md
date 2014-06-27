@@ -6,7 +6,7 @@ Fork this repository, update this file to include your answers, and submit a pul
 
 1. I'm creating an app to keep track of bunnies. I already have a `bunnies` table, but I want to create a migration to add a "weight" column to it. What command should I run in my terminal to get started?
 
-rails g migrations
+rails g migration
 
 
 2. I just realized I misspelled the "weight" column in my migration, but I already ran `rake db:migrate`. What should I do to fix this? (give exact steps and/or commands to run)
