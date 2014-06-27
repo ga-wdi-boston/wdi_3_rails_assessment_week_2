@@ -82,7 +82,7 @@ link_to(bunny.name, bunny_path(bunny))
 
 5. I've created a view partial called `_form.html.erb` and I want to render this partial into my "new" view. What HTML/ERB code should I write to do this?
 
-<%= render('form')
+<%= render('form') %>
 
 
 
