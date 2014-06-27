@@ -23,7 +23,7 @@ Bunny.where(color: 'white').order(:name)
 
 4. Now I want to find the specific bunny whose name is `'George'` (names are unique, so there should be only one).
 
-Bunny.find_by name: 'George'
+Bunny.find_by(name: 'George')
 
 5. I want to make sure nobunny, er, I mean nobody, can create a bunny without a name. What code should I add to my `Bunny` model to validate this?
 
@@ -44,14 +44,22 @@ In the bunny model - enter validates :name, presence: true
 
 There is likely a bunny_params method which limits the attributes which can be modified. Add the :bunny attribute to this method
 
+*** Correct answer:
+
+Passing form parameters straight to the new or update mehtods is not allowed as it poses a security risk. Need to create a strong parameters filtering method in your controller to filter the params so they include only the attirbutes that should be updated by the user.
+
 
 4. When I create or update a bunny in my controller, how can I find out whether the bunny saved successfully?
 
-
+if @bunny.update(bunny_params)
+  ... success ...
+else
+ ... failure
+end
 
 5. Assuming my bunny saved successfully, what code should I write to redirect the user to the "show" page for the bunny, with a flash message indicating success?
 
-redirect_to bunny_path (message?)
+redirect_to bunny_path **redirect_to @bunny
 
 ### Routes/Views
 
@@ -73,7 +81,7 @@ resources :bunnies
 
 4. In one of my views, I want to create a link to the "show" path for a specific bunny that I have stored in the variable `bunny`. `rake routes` tells me that I have a standard `bunny_path` helper available. How do I create this link?
 
-link_to('Text', bunny_path)
+link_to('Text', bunny_path) **  Correct answer: link_to('text', bunny)
 
 5. I've created a view partial called `_form.html.erb` and I want to render this partial into my "new" view. What HTML/ERB code should I write to do this?
 
